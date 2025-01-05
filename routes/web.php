@@ -1,37 +1,22 @@
 <?php
 
+use App\Http\Controllers\backend\ServicePlanController;
+use App\Http\Controllers\frontend\ClientServiceStoreController;
 use App\Http\Controllers\ProfileController;
+use App\Models\ServicePlan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
     return view('welcome');
-});
-Route::post('/serviceForm', function (Request $request) {
-    dd($request);
-})->name('serviceForm.store');
+})->name('home');
+
+Route::post('/serviceForm', [ClientServiceStoreController::class, 'store'])->name('serviceForm.store');
 Route::get('/selected-plan/{id}', function ($id) {
-    $data = '[
-        {
-            "id": 1,
-            "plan_name": "Basic Plan",
-            "price": 9.99
-        },
-        {
-            "id": 2,
-            "plan_name": "Standard Plan",
-            "price": 19.99
-        },
-        {
-            "id": 3,
-            "plan_name": "Premium Plan",
-            "price": 29.99
-        }
-    ]';
-    
-   $getPlan = collect(json_decode($data))->where('id',$id)->first();
-   return view('frontend.pages.price-select-form',compact('getPlan'));
+   $getPlan = ServicePlan::findOrFail($id);
+
+    return view('frontend.pages.price-select-form', compact('getPlan'));
 });
 
 
@@ -45,4 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/service-type', [ServicePlanController::class, 'create'])->name('service-plan.create');
+Route::post('/service-type/store', [ServicePlanController::class, 'store'])->name('service-plan.store');
+Route::post('/service-type/update', [ServicePlanController::class, 'update'])->name('service-plan.update');
+
+
+require __DIR__ . '/auth.php';

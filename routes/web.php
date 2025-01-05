@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    $getPlan = ServicePlan::get();
+
+    return view('welcome',compact('getPlan'));
 })->name('home');
 
 Route::post('/serviceForm', [ClientServiceStoreController::class, 'store'])->name('serviceForm.store');

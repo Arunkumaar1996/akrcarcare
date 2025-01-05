@@ -7,6 +7,9 @@
     <title>Responsive Car Wash Service</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 
     <style>
         /* Navbar Styles */
@@ -198,7 +201,7 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg fixed-top " style="background-color: #f4a261;">
         <div class="container">
             <a class="navbar-brand" href="#">CleanCar Wash</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -218,25 +221,26 @@
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="#about-us">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link" href="#our-service">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Portfolio</a>
+                            <a class="nav-link" href="#our-plan">Our plan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="#footer">Contact</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
+    
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero mt-5">
     
 
         <div class="container">
@@ -268,9 +272,39 @@
         </div>
     </section>
 
+    {{-- About page --}}
+    <section class="about-us py-5" id="about-us">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Column: Image -->
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="{{ asset('assets/images/04.jpg') }}" class="img-fluid rounded shadow" alt="About Us Image">
+                </div>
+                
+                <!-- Right Column: Content -->
+                <div class="col-md-6">
+                    <h2 class="text-uppercase fw-bold mb-3">About Us</h2>
+                    <p class="mb-4">
+                        At <strong>PaiCar</strong>, we are dedicated to delivering exceptional services that exceed expectations. 
+                        With years of experience, a passionate team, and a commitment to innovation, we ensure that every client 
+                        receives personalized attention and the highest quality solutions tailored to their needs.
+                    </p>
+                    <p class="mb-4">
+                        Our journey began with a vision to create meaningful impacts in our community through service excellence. 
+                        Today, we stand as a trusted partner for hundreds of satisfied clients, continuously pushing the boundaries of 
+                        what's possible.
+                    </p>
+                    <a href="#services" class="btn btn-explore">Learn More About Our Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Service Cards Section -->
-    <section>
-        <div class="container py-5">
+    <section id="our-service">
+        <h1 class="text-center ">Our Services</h1>
+
+        <div class="container py-3">
             <div class="row g-4">
                 <!-- Daily Cleaning Card -->
                 <div class="col-lg-4 col-md-6">
@@ -283,11 +317,7 @@
                             <h5 class="card-title">Daily Cleaning</h5>
                             <p class="card-text">Keep your car spotless every day with our regular cleaning services.
                                 Perfect for busy schedules!</p>
-                                <form action="{{ url('selected-plan/1') }}" method="get">
-                                  @csrf
-                                  <button class="btn btn-explore me-3" id="select-palan-3"
-                                      type="submit">select</button>
-                              </form>
+                               
                         </div>
                     </div>
                 </div>
@@ -303,11 +333,7 @@
                             <h5 class="card-title">Monthly Cleaning</h5>
                             <p class="card-text">Maintain your car's shine with our monthly service package. Great for
                                 regular upkeep.</p>
-                                <form action="{{ url('selected-plan/2') }}" method="get">
-                                  @csrf
-                                  <button class="btn btn-explore me-3" id="select-palan-3"
-                                      type="submit">select</button>
-                              </form>
+                                
                         </div>
                     </div>
                 </div>
@@ -323,24 +349,139 @@
                             <h5 class="card-title">Urgent Cleaning</h5>
                             <p class="card-text">Need a quick cleaning? Our urgent service guarantees fast and thorough
                                 cleaning when you need it the most.</p>
-                            <form action="{{ url('selected-plan/3') }}" method="get">
-                                @csrf
-                                <button class="btn btn-explore me-3" id="select-palan-3"
-                                    type="submit">select</button>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <section id="our-plan">
+        <div class="container pb-5">
+            <h1 class="text-center mb-5">Our Plans</h1>
+            <div class="row g-4">
+        
+                <!-- Basic Plan -->
+                <div class="col-md-4">
+                    <div class="card plan-card text-center border-primary">
+                        <div class="card-header bg-primary text-white">
+                            {{ucfirst($getPlan[0]->plan_name)}}
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">₹ {{$getPlan[0]->plan_price}}</h3>
+                            <p class="card-text">A basic plan offering essential features for individuals.</p>
+                        </div>
+                        <div class="card-footer">
+                            <form action="{{ url('selected-plan/'.$getPlan[0]->id) }}" method="get">
+                                @csrf
+                                <button class="btn btn-primary me-3" id="select-palan-3"
+                                    type="submit">Choose Plan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Standard Plan -->
+                <div class="col-md-4">
+                    <div class="card plan-card text-center border-success">
+                        <div class="card-header bg-success text-white">
+                            {{ucfirst($getPlan[1]->plan_name)}}
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">₹ {{$getPlan[1]->plan_price}}</h3>
+                            <p class="card-text">A balanced plan offering great value for families.</p>
+                        </div>
+                        <div class="card-footer">
+                            <form action="{{ url('selected-plan/'.$getPlan[1]->id) }}" method="get">
+                                @csrf
+                                <button class="btn btn-success me-3" id="select-palan-3"
+                                    type="submit">Choose Plan</button>
+                            </form>                        
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Premium Plan -->
+                <div class="col-md-4">
+                    <div class="card plan-card text-center border-danger">
+                        <div class="card-header bg-danger text-white">
+                            {{ucfirst($getPlan[2]->plan_name)}}
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">₹ {{$getPlan[2]->plan_price}}</h3>
+                            <p class="card-text">An all-inclusive plan offering premium features.</p>
+                        </div>
+                        <div class="card-footer">
+                            <form action="{{ url('selected-plan/'.$getPlan[2]->id) }}" method="get">
+                                @csrf
+                                <button class="btn btn-danger me-3" id="select-palan-3"
+                                    type="submit">Choose Plan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    </section>
+    <section id="footer">
+        <footer style="background-color: #2a2a2a; color: #f4f4f4;" class="py-5">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and About Section -->
+                    <div class="col-md-4 mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="path/to/logo.png" alt="Site Logo" style="height: 50px; margin-right: 10px;">
+                            <h6 class="text-uppercase fw-bold mb-0" style="color: #f4a261;">PaiCar</h6>
+                        </div>
+                        <p class="small">
+                            We specialize in delivering top-notch services that cater to your unique needs. Our mission is to ensure quality, trust, and reliability in every interaction.
+                        </p>
+                    </div>
+        
+                    <!-- Quick Links -->
+                    <div class="col-md-4 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-3" style="color: #f4a261;">Quick Links</h6>
+                        <ul class="list-unstyled small">
+                            <li><a href="#" class="text-decoration-none text-light">Home</a></li>
+                            <li><a href="#" class="text-decoration-none text-light">About</a></li>
+                            <li><a href="#" class="text-decoration-none text-light">Services</a></li>
+                            <li><a href="#" class="text-decoration-none text-light">Contact</a></li>
+                        </ul>
+                    </div>
+        
+                    <!-- Contact Section -->
+                    <div class="col-md-4 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-3" style="color: #f4a261;">Get in Touch</h6>
+                        <ul class="list-unstyled small">
+                            <li><i class="bi bi-geo-alt-fill me-2"></i>456 Corporate Ave, Suite 300</li>
+                            <li><i class="bi bi-envelope-fill me-2"></i>hello@yourcompany.com</li>
+                            <li><i class="bi bi-telephone-fill me-2"></i>+1 (800) 123-4567</li>
+                        </ul>
+                        <div>
+                            <a href="https://facebook.com" target="_blank" class="me-3 text-light"><i class="bi bi-facebook fs-5"></i></a>
+                            <a href="https://twitter.com" target="_blank" class="me-3 text-light"><i class="bi bi-twitter fs-5"></i></a>
+                            <a href="https://instagram.com" target="_blank" class="me-3 text-light"><i class="bi bi-instagram fs-5"></i></a>
+                            <a href="https://linkedin.com" target="_blank" class="text-light"><i class="bi bi-linkedin fs-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row mt-4">
+                    <div class="col-12 text-center">
+                        <p class="small mb-0" style="color: #bbbbbb;">&copy; 2025 Paicar. Designed with ❤️ by Star Team.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Preloader functionality
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
-            preloader.style.display = 'none'; // Hide preloader after images are loaded
+            preloader.style.display = 'none'; 
         });
     </script>
 

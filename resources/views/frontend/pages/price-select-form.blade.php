@@ -76,6 +76,10 @@
 </head>
 
 <body>
+    @php
+    $tnList = file_get_contents('resources/jsons/tamilnadu_districts.json');
+         $states = json_decode($tnList, true);
+    @endphp
     <div class="parent-form">
         <div class="glass-form mt-5">
             <h4 class="form-heading">Car Service Form</h4>
@@ -169,6 +173,25 @@
                     <input type="text" class="form-control" id="city" value="{{ old('city') }}"
                         name="city" placeholder="Enter city" required>
                     <div class="invalid-feedback">Enter city.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="state" class="form-label">State *</label>
+                    <select class="form-control" id="state" name="state" required>
+                        <option value="" disabled selected>Select a state</option>
+                        @foreach ($states as $state)
+                            <option value="{{ $state }}" {{ old('state') == $state ? 'selected' : '' }}>
+                                {{ $state }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="invalid-feedback">Please select a state.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="pin_code" class="form-label">Pincode *</label>
+                    <input type="text" class="form-control" id="pin_code" value="{{ old('pin_code') }}"
+                        name="pin_code" placeholder="Enter pincode" required>
+                    <div class="invalid-feedback">State</div>
                 </div>
 
                 <!-- Car Details -->

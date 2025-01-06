@@ -20,6 +20,11 @@ Route::get('/selected-plan/{id}', function ($id) {
 
     return view('frontend.pages.price-select-form', compact('getPlan'));
 });
+Route::post('/find/plan/data', function (Request $request) {
+   $getPlan = ServicePlan::findOrFail($request->id);
+
+    return response()->json($getPlan);
+})->name('find.plan.data');
 
 
 Route::get('/dashboard', function () {

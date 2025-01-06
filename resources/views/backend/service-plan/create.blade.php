@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Create Service Type') }}
             </h2>
-            @if (count($getPlans) < 3)
+            @if (count($getPlans) < 4)
                 <x-comman-button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight" x-data=""
                     class="btn btn-explore">{{ __('Create') }}</x-comman-button>

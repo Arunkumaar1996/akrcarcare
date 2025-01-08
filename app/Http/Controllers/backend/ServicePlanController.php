@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CarPrice;
 use App\Models\ServicePlan;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class ServicePlanController extends Controller
     }
     public function create(){
         $getPlans =  ServicePlan::paginate(10);
-        return view('backend.service-plan.create',compact('getPlans')); 
+        $carPrices =  CarPrice::paginate(10);
+        return view('backend.service-plan.create',compact('getPlans','carPrices')); 
     }
     public function store(Request $request){
         $validatedData = $request->validate([
@@ -21,7 +23,7 @@ class ServicePlanController extends Controller
             'plan_price' => 'required|numeric|min:1|max:9999',
         ]);
         ServicePlan::create([
-            'plan_name' => $validatedData['plan_name'],
+            'plan_name' => strtolower($validatedData['plan_name']),
             'plan_price' => $validatedData['plan_price'],
         ]);
         // dd($request->all());
@@ -38,7 +40,7 @@ class ServicePlanController extends Controller
         ]);
         try {
             $servicePlan->update([
-                'plan_name' => $request->input('plan_name'),
+                'plan_name' => strtolower($request->input('plan_name')),
                 'plan_price' => $request->input('plan_price'),
             ]);
             return redirect()->back()->with('success', 'Service plan updated successfully');

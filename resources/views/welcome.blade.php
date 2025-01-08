@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Bootstrap Icons CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 
     <style>
@@ -237,11 +237,11 @@
             </div>
         </div>
     </nav>
-    
+
 
     <!-- Hero Section -->
     <section class="hero mt-5">
-    
+
 
         <div class="container">
             <div class="row align-items-center">
@@ -278,20 +278,25 @@
             <div class="row align-items-center">
                 <!-- Left Column: Image -->
                 <div class="col-md-6 mb-4 mb-md-0">
-                    <img src="{{ asset('assets/images/04.jpg') }}" class="img-fluid rounded shadow" alt="About Us Image">
+                    <img src="{{ asset('assets/images/04.jpg') }}" class="img-fluid rounded shadow"
+                        alt="About Us Image">
                 </div>
-                
+
                 <!-- Right Column: Content -->
                 <div class="col-md-6">
                     <h2 class="text-uppercase fw-bold mb-3">About Us</h2>
                     <p class="mb-4">
-                        At <strong>PaiCar</strong>, we are dedicated to delivering exceptional services that exceed expectations. 
-                        With years of experience, a passionate team, and a commitment to innovation, we ensure that every client 
+                        At <strong>PaiCar</strong>, we are dedicated to delivering exceptional services that exceed
+                        expectations.
+                        With years of experience, a passionate team, and a commitment to innovation, we ensure that
+                        every client
                         receives personalized attention and the highest quality solutions tailored to their needs.
                     </p>
                     <p class="mb-4">
-                        Our journey began with a vision to create meaningful impacts in our community through service excellence. 
-                        Today, we stand as a trusted partner for hundreds of satisfied clients, continuously pushing the boundaries of 
+                        Our journey began with a vision to create meaningful impacts in our community through service
+                        excellence.
+                        Today, we stand as a trusted partner for hundreds of satisfied clients, continuously pushing the
+                        boundaries of
                         what's possible.
                     </p>
                     <a href="#services" class="btn btn-explore">Learn More About Our Services</a>
@@ -317,7 +322,7 @@
                             <h5 class="card-title">Daily Cleaning</h5>
                             <p class="card-text">Keep your car spotless every day with our regular cleaning services.
                                 Perfect for busy schedules!</p>
-                               
+
                         </div>
                     </div>
                 </div>
@@ -333,7 +338,7 @@
                             <h5 class="card-title">Monthly Cleaning</h5>
                             <p class="card-text">Maintain your car's shine with our monthly service package. Great for
                                 regular upkeep.</p>
-                                
+
                         </div>
                     </div>
                 </div>
@@ -349,7 +354,7 @@
                             <h5 class="card-title">Urgent Cleaning</h5>
                             <p class="card-text">Need a quick cleaning? Our urgent service guarantees fast and thorough
                                 cleaning when you need it the most.</p>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -360,58 +365,124 @@
         <div class="container pb-5">
             <h1 class="text-center mb-5">Our Plans</h1>
             <div class="row g-4">
-        
                 <!-- Basic Plan -->
                 <div class="col-md-4">
-                    <div class="card plan-card text-center border-primary">
+                    <div class="card plan-card text-center border-primary"
+                        data-default-price="{{ $getPlan[0]->plan_price }}">
                         <div class="card-header bg-primary text-white">
-                            {{ucfirst($getPlan[0]->plan_name)}}
+                            {{ ucfirst($getPlan[0]->plan_name) }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">₹ {{$getPlan[0]->plan_price}}</h3>
+                            <h3 class="card-title plan-price">₹ {{ $getPlan[0]->plan_price }}</h3>
                             <p class="card-text">A basic plan offering essential features for individuals.</p>
                         </div>
+                        <div class="mb-3 row">
+                            <div class="col-12 col-md-5 p-0">
+                                <label for="carType" class="form-label form-label-sm">Car Type</label>
+                            </div>
+                            <div class="col-12 col-md-7">
+                                <select class="form-select form-select-sm carType" name="car_type" required>
+                                    <option value="">Choose</option>
+                                    <option value="SUV" {{ old('carType') == 'SUV' ? 'selected' : '' }}>SUV
+                                    </option>
+                                    <option value="Sedan" {{ old('carType') == 'Sedan' ? 'selected' : '' }}>Sedan
+                                    </option>
+                                    <option value="Hatchback" {{ old('carType') == 'Hatchback' ? 'selected' : '' }}>
+                                        Hatchback</option>
+                                    <option value="Foreign" {{ old('carType') == 'Foreign' ? 'selected' : '' }}>
+                                        Foreign</option>
+                                </select>
+                                <div class="invalid-feedback">Select car type.</div>
+                            </div>
+                        </div>
                         <div class="card-footer">
-                                <button class="btn btn-primary me-3 select-plan" id="select-palan-3"
-                                type="button" data-plan-id="{{ $getPlan[0]->id }}" data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose Plan</button>
+                            <button class="btn btn-primary me-3 select-plan" id="select-plan-0" type="button"
+                                data-plan-id="{{ $getPlan[0]->id }}" data-bs-toggle="offcanvas"
+                                data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose
+                                Plan</button>
                         </div>
                     </div>
                 </div>
-        
+
                 <!-- Standard Plan -->
                 <div class="col-md-4">
-                    <div class="card plan-card text-center border-success">
+                    <div class="card plan-card text-center border-success"
+                        data-default-price="{{ $getPlan[1]->plan_price }}">
                         <div class="card-header bg-success text-white">
-                            {{ucfirst($getPlan[1]->plan_name)}}
+                            {{ ucfirst($getPlan[1]->plan_name) }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">₹ {{$getPlan[1]->plan_price}}</h3>
+                            <h3 class="card-title plan-price">₹ {{ $getPlan[1]->plan_price }}</h3>
                             <p class="card-text">A balanced plan offering great value for families.</p>
                         </div>
+                        <div class="mb-3 row">
+                            <div class="col-12 col-md-5 p-0">
+                                <label for="carType" class="form-label form-label-sm">Car Type</label>
+                            </div>
+                            <div class="col-12 col-md-7">
+                                <select class="form-select form-select-sm carType" name="car_type" required>
+                                    <option value="">Choose</option>
+                                    <option value="SUV" {{ old('carType') == 'SUV' ? 'selected' : '' }}>SUV
+                                    </option>
+                                    <option value="Sedan" {{ old('carType') == 'Sedan' ? 'selected' : '' }}>Sedan
+                                    </option>
+                                    <option value="Hatchback" {{ old('carType') == 'Hatchback' ? 'selected' : '' }}>
+                                        Hatchback</option>
+                                    <option value="Foreign" {{ old('carType') == 'Foreign' ? 'selected' : '' }}>
+                                        Foreign</option>
+                                </select>
+                                <div class="invalid-feedback">Select car type.</div>
+                            </div>
+                        </div>
                         <div class="card-footer">
-                                <button class="btn btn-success me-3 select-plan" id="select-palan-3"
-                                type="button" data-plan-id="{{ $getPlan[1]->id }}" data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose Plan</button>
+                            <button class="btn btn-success me-3 select-plan" id="select-plan-1" type="button"
+                                data-plan-id="{{ $getPlan[1]->id }}" data-bs-toggle="offcanvas"
+                                data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose
+                                Plan</button>
                         </div>
                     </div>
                 </div>
-        
+
                 <!-- Premium Plan -->
                 <div class="col-md-4">
-                    <div class="card plan-card text-center border-danger">
+                    <div class="card plan-card text-center border-danger"
+                        data-default-price="{{ $getPlan[2]->plan_price }}">
                         <div class="card-header bg-danger text-white">
-                            {{ucfirst($getPlan[2]->plan_name)}}
+                            {{ ucfirst($getPlan[2]->plan_name) }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">₹ {{$getPlan[2]->plan_price}}</h3>
+                            <h3 class="card-title plan-price">₹ {{ $getPlan[2]->plan_price }}</h3>
                             <p class="card-text">An all-inclusive plan offering premium features.</p>
                         </div>
+                        <div class="mb-3 row">
+                            <div class="col-12 col-md-5 p-0">
+                                <label for="carType" class="form-label form-label-sm">Car Type</label>
+                            </div>
+                            <div class="col-12 col-md-7">
+                                <select class="form-select form-select-sm carType" name="car_type" required>
+                                    <option value="">Choose</option>
+                                    <option value="SUV" {{ old('carType') == 'SUV' ? 'selected' : '' }}>SUV
+                                    </option>
+                                    <option value="Sedan" {{ old('carType') == 'Sedan' ? 'selected' : '' }}>Sedan
+                                    </option>
+                                    <option value="Hatchback" {{ old('carType') == 'Hatchback' ? 'selected' : '' }}>
+                                        Hatchback</option>
+                                    <option value="Foreign" {{ old('carType') == 'Foreign' ? 'selected' : '' }}>
+                                        Foreign</option>
+                                </select>
+                                <div class="invalid-feedback">Select car type.</div>
+                            </div>
+                        </div>
                         <div class="card-footer">
-                                <button class="btn btn-danger me-3 select-plan" data-plan-id="{{ $getPlan[2]->id }}" id="select-palan-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose Plan</button>
+                            <button class="btn btn-danger me-3 select-plan" data-plan-id="{{ $getPlan[2]->id }}"
+                                id="select-plan-2" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose
+                                Plan</button>
                         </div>
                     </div>
                 </div>
-        
             </div>
+
         </div>
     </section>
     <section id="footer">
@@ -425,10 +496,11 @@
                             <h6 class="text-uppercase fw-bold mb-0" style="color: #f4a261;">PaiCar</h6>
                         </div>
                         <p class="small">
-                            We specialize in delivering top-notch services that cater to your unique needs. Our mission is to ensure quality, trust, and reliability in every interaction.
+                            We specialize in delivering top-notch services that cater to your unique needs. Our mission
+                            is to ensure quality, trust, and reliability in every interaction.
                         </p>
                     </div>
-        
+
                     <!-- Quick Links -->
                     <div class="col-md-4 mb-4">
                         <h6 class="text-uppercase fw-bold mb-3" style="color: #f4a261;">Quick Links</h6>
@@ -439,7 +511,7 @@
                             <li><a href="#" class="text-decoration-none text-light">Contact</a></li>
                         </ul>
                     </div>
-        
+
                     <!-- Contact Section -->
                     <div class="col-md-4 mb-4">
                         <h6 class="text-uppercase fw-bold mb-3" style="color: #f4a261;">Get in Touch</h6>
@@ -449,279 +521,348 @@
                             <li><i class="bi bi-telephone-fill me-2"></i>+1 (800) 123-4567</li>
                         </ul>
                         <div>
-                            <a href="https://facebook.com" target="_blank" class="me-3 text-light"><i class="bi bi-facebook fs-5"></i></a>
-                            <a href="https://twitter.com" target="_blank" class="me-3 text-light"><i class="bi bi-twitter fs-5"></i></a>
-                            <a href="https://instagram.com" target="_blank" class="me-3 text-light"><i class="bi bi-instagram fs-5"></i></a>
-                            <a href="https://linkedin.com" target="_blank" class="text-light"><i class="bi bi-linkedin fs-5"></i></a>
+                            <a href="https://facebook.com" target="_blank" class="me-3 text-light"><i
+                                    class="bi bi-facebook fs-5"></i></a>
+                            <a href="https://twitter.com" target="_blank" class="me-3 text-light"><i
+                                    class="bi bi-twitter fs-5"></i></a>
+                            <a href="https://instagram.com" target="_blank" class="me-3 text-light"><i
+                                    class="bi bi-instagram fs-5"></i></a>
+                            <a href="https://linkedin.com" target="_blank" class="text-light"><i
+                                    class="bi bi-linkedin fs-5"></i></a>
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="row mt-4">
                     <div class="col-12 text-center">
-                        <p class="small mb-0" style="color: #bbbbbb;">&copy; 2025 Paicar. Designed with ❤️ by Star Team.</p>
+                        <p class="small mb-0" style="color: #bbbbbb;">&copy; 2025 Paicar. Designed with ❤️ by Star
+                            Team.</p>
                     </div>
                 </div>
             </div>
         </footer>
-        
+
     </section>
 
     {{-- offcanvas --}}
-{{-- offcanvas --}}
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">
-    Open Form
-</button>
+    {{-- offcanvas --}}
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas"
+        aria-controls="serviceFormOffcanvas">
+        Open Form
+    </button>
 
-<!-- Offcanvas -->
-<div class="offcanvas offcanvas-start w-100" tabindex="-1" id="serviceFormOffcanvas" aria-labelledby="serviceFormOffcanvasLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="serviceFormOffcanvasLabel">Service Form</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body" style="background-color: saddlebrown;">
-        <!-- Your Form Goes Here -->
-        <form action="{{ route('serviceForm.store') }}" method="POST" id="serviceForm" class="needs-validation" novalidate>
-            @csrf
+    <!-- Offcanvas -->
+    <div class="offcanvas offcanvas-start w-100" tabindex="-1" id="serviceFormOffcanvas"
+        aria-labelledby="serviceFormOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="serviceFormOffcanvasLabel">Service Form</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" style="background-color: saddlebrown;">
+            <!-- Your Form Goes Here -->
+            <form action="{{ route('serviceForm.store') }}" method="POST" id="serviceForm"
+                class="needs-validation" novalidate>
+                @csrf
 
-            <!-- Service Type & Price Fieldset -->
-            <fieldset class="mb-4">
-                <legend class="fw-bold">Service Details</legend>
+                <!-- Service Type & Price Fieldset -->
+                <fieldset class="mb-4">
+                    <legend class="fw-bold">Service Details</legend>
 
-                <div class="row g-2">
-                    <!-- Service Type -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="serviceType" class="form-label">Service Type *</label>
-                            <select class="form-select" id="serviceType" name="service_type" required disabled>
-                               
-                            </select>
-                            <div class="invalid-feedback">Select a service type.</div>
-                        </div>
-                    </div>
+                    <div class="row g-2">
+                        <!-- Service Type -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="serviceType" class="form-label">Service Type *</label>
+                                <select class="form-select" id="serviceType" name="service_type" required disabled>
 
-                    <!-- Service Price -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="servicePrice" class="form-label">Service Price *</label>
-                            <input type="number" class="form-control" value="" id="servicePrice" name="servicePrice" placeholder="Enter price" required disabled>
-                            <input type="hidden" name="service_type_id" value="">
-                            <div class="invalid-feedback">Enter service price.</div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- Client Details Fieldset -->
-            <fieldset class="mb-4">
-                <legend class="fw-bold">Client Details</legend>
-
-                <div class="row g-2">
-                    <!-- Client Name -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="clientName" class="form-label">Client Name *</label>
-                            <input type="text" class="form-control" id="clientName" value="{{ old('clientName') }}" name="client_name" placeholder="Enter name" required>
-                            <div class="invalid-feedback">Enter client's name.</div>
-                        </div>
-                    </div>
-
-                    <!-- Client Email -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="clientEmail" class="form-label">Client Email *</label>
-                            <input type="email" class="form-control" id="client_email" value="{{ old('clientEmail') }}" name="client_email" placeholder="Enter email" required>
-                            <div class="invalid-feedback">Enter valid email.</div>
-                        </div>
-                    </div>
-
-                    <!-- Client Phone -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="clientPhone" class="form-label">Phone No *</label>
-                            <input type="tel" class="form-control" id="client_phone" value="{{ old('clientPhone') }}" name="client_phone" placeholder="Enter phone" pattern="[0-9]{10}" required>
-                            <div class="invalid-feedback">Enter valid phone number.</div>
-                        </div>
-                    </div>
-
-                    <!-- Door/Flat No -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="doorNo" class="form-label">Door/Flat No *</label>
-                            <input type="text" class="form-control" id="doorNo" value="{{ old('doorNo') }}" name="door_no" placeholder="Enter number" required>
-                            <div class="invalid-feedback">Enter door/flat no.</div>
-                        </div>
-                    </div>
-
-                    <!-- Address Line 1 -->
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <label for="address1" class="form-label">Address Line 1 *</label>
-                            <input type="text" class="form-control" id="address1" value="{{ old('address1') }}" name="address1" placeholder="Enter address" required>
-                            <div class="invalid-feedback">Enter address.</div>
-                        </div>
-                    </div>
-
-                    <!-- City -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="city" class="form-label">City *</label>
-                            <input type="text" class="form-control" id="city" value="{{ old('city') }}" name="city" placeholder="Enter city" required>
-                            <div class="invalid-feedback">Enter city.</div>
-                        </div>
-                    </div>
-
-                    <!-- State -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="state" class="form-label">State *</label>
-                            <select class="form-control" id="state" name="state" required>
-                                <option value="" disabled selected>Select a state</option>
-                            </select>
-                            <div class="invalid-feedback">Please select a state.</div>
-                        </div>
-                    </div>
-
-                    <!-- Pincode -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="pin_code" class="form-label">Pincode *</label>
-                            <input type="text" class="form-control" id="pin_code" value="{{ old('pin_code') }}" name="pin_code" placeholder="Enter pincode" required>
-                            <div class="invalid-feedback">Enter valid pincode.</div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- Car Details Fieldset -->
-            <fieldset class="mb-4">
-                <legend class="fw-bold">Car Details</legend>
-
-                <div class="row g-2">
-                    <!-- Car No -->
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <label for="carNo" class="form-label">Car No (TN 00 AA 0000) *</label>
-                            <div class="d-flex gap-2">
-                                <!-- State Code -->
-                                <input type="text" class="form-control" value="{{ old('stateCode') }}" id="stateCode" name="state_code" maxlength="2" pattern="[A-Za-z]{2}" placeholder="TN" oninput="this.value = this.value.toUpperCase()" required>
-                                <!-- District Code -->
-                                <input type="text" class="form-control" value="{{ old('districtCode') }}" id="district_code" name="district_code" maxlength="2" pattern="[0-9]{2}" placeholder="00" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                <!-- Series Code -->
-                                <input type="text" class="form-control" value="{{ old('seriesCode') }}" id="seriesCode" name="series_code" maxlength="2" pattern="[A-Za-z]{2}" placeholder="AA" oninput="this.value = this.value.toUpperCase()" required>
-                                <!-- Number Code -->
-                                <input type="text" class="form-control" value="{{ old('numberCode') }}" id="numberCode" name="number_code" maxlength="4" pattern="[0-9]{4}" placeholder="0000" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                </select>
+                                <div class="invalid-feedback">Select a service type.</div>
                             </div>
-                            <div class="invalid-feedback">Enter a valid car number in the format TN 00 AA 0000.</div>
                         </div>
-                    </div>
 
-                    <!-- Car Type -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="carType" class="form-label">Car Type *</label>
-                            <select class="form-select" id="carType" name="car_type" required>
-                                <option value="">Choose</option>
-                                <option value="SUV" {{ old('carType') == 'SUV' ? 'selected' : '' }}>SUV</option>
-                                <option value="Sedan" {{ old('carType') == 'Sedan' ? 'selected' : '' }}>Sedan</option>
-                                <option value="Hatchback" {{ old('carType') == 'Hatchback' ? 'selected' : '' }}>Hatchback</option>
-                                <option value="Foreign" {{ old('carType') == 'Foreign' ? 'selected' : '' }}>Foreign</option>
-                            </select>
-                            <div class="invalid-feedback">Select car type.</div>
+                        <!-- Service Price -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="servicePrice" class="form-label">Service Price *</label>
+                                <input type="number" class="form-control" value="" id="servicePrice"
+                                    name="servicePrice" placeholder="Enter price" required disabled>
+                                <input type="hidden" name="service_type_id" value="">
+                                <div class="invalid-feedback">Enter service price.</div>
+                            </div>
                         </div>
                     </div>
+                </fieldset>
 
-                    <!-- Car Name -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="carName" class="form-label">Car Name *</label>
-                            <input type="text" class="form-control" id="carName" value="{{ old('carName') }}" name="car_name" placeholder="Enter car name" required>
-                            <div class="invalid-feedback">Enter car name.</div>
+                <!-- Client Details Fieldset -->
+                <fieldset class="mb-4">
+                    <legend class="fw-bold">Client Details</legend>
+
+                    <div class="row g-2">
+                        <!-- Client Name -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="clientName" class="form-label">Client Name *</label>
+                                <input type="text" class="form-control" id="clientName"
+                                    value="{{ old('clientName') }}" name="client_name" placeholder="Enter name"
+                                    required>
+                                <div class="invalid-feedback">Enter client's name.</div>
+                            </div>
+                        </div>
+
+                        <!-- Client Email -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="clientEmail" class="form-label">Client Email *</label>
+                                <input type="email" class="form-control" id="client_email"
+                                    value="{{ old('clientEmail') }}" name="client_email" placeholder="Enter email"
+                                    required>
+                                <div class="invalid-feedback">Enter valid email.</div>
+                            </div>
+                        </div>
+
+                        <!-- Client Phone -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="clientPhone" class="form-label">Phone No *</label>
+                                <input type="tel" class="form-control" id="client_phone"
+                                    value="{{ old('clientPhone') }}" name="client_phone" placeholder="Enter phone"
+                                    pattern="[0-9]{10}" required>
+                                <div class="invalid-feedback">Enter valid phone number.</div>
+                            </div>
+                        </div>
+
+                        <!-- Door/Flat No -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="doorNo" class="form-label">Door/Flat No *</label>
+                                <input type="text" class="form-control" id="doorNo"
+                                    value="{{ old('doorNo') }}" name="door_no" placeholder="Enter number" required>
+                                <div class="invalid-feedback">Enter door/flat no.</div>
+                            </div>
+                        </div>
+
+                        <!-- Address Line 1 -->
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="address1" class="form-label">Address Line 1 *</label>
+                                <input type="text" class="form-control" id="address1"
+                                    value="{{ old('address1') }}" name="address1" placeholder="Enter address"
+                                    required>
+                                <div class="invalid-feedback">Enter address.</div>
+                            </div>
+                        </div>
+
+                        <!-- City -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="city" class="form-label">City *</label>
+                                <input type="text" class="form-control" id="city"
+                                    value="{{ old('city') }}" name="city" placeholder="Enter city" required>
+                                <div class="invalid-feedback">Enter city.</div>
+                            </div>
+                        </div>
+
+                        <!-- State -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="state" class="form-label">State *</label>
+                                <select class="form-control" id="state" name="state" required>
+                                    <option value="" disabled selected>Select a state</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a state.</div>
+                            </div>
+                        </div>
+
+                        <!-- Pincode -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="pin_code" class="form-label">Pincode *</label>
+                                <input type="text" class="form-control" id="pin_code"
+                                    value="{{ old('pin_code') }}" name="pin_code" placeholder="Enter pincode"
+                                    required>
+                                <div class="invalid-feedback">Enter valid pincode.</div>
+                            </div>
                         </div>
                     </div>
+                </fieldset>
+
+                <!-- Car Details Fieldset -->
+                <fieldset class="mb-4">
+                    <legend class="fw-bold">Car Details</legend>
+
+                    <div class="row g-2">
+                        <!-- Car No -->
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="carNo" class="form-label">Car No (TN 00 AA 0000) *</label>
+                                <div class="d-flex gap-2">
+                                    <!-- State Code -->
+                                    <input type="text" class="form-control" value="{{ old('stateCode') }}"
+                                        id="stateCode" name="state_code" maxlength="2" pattern="[A-Za-z]{2}"
+                                        placeholder="TN" oninput="this.value = this.value.toUpperCase()" required>
+                                    <!-- District Code -->
+                                    <input type="text" class="form-control" value="{{ old('districtCode') }}"
+                                        id="district_code" name="district_code" maxlength="2" pattern="[0-9]{2}"
+                                        placeholder="00" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        required>
+                                    <!-- Series Code -->
+                                    <input type="text" class="form-control" value="{{ old('seriesCode') }}"
+                                        id="seriesCode" name="series_code" maxlength="2" pattern="[A-Za-z]{2}"
+                                        placeholder="AA" oninput="this.value = this.value.toUpperCase()" required>
+                                    <!-- Number Code -->
+                                    <input type="text" class="form-control" value="{{ old('numberCode') }}"
+                                        id="numberCode" name="number_code" maxlength="4" pattern="[0-9]{4}"
+                                        placeholder="0000" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        required>
+                                </div>
+                                <div class="invalid-feedback">Enter a valid car number in the format TN 00 AA 0000.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Car Type -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="carType" class="form-label">Car Type *</label>
+                                <select class="form-select" id="carType" name="car_type" required>
+                                    <option value="">Choose</option>
+                                    <option value="SUV" {{ old('carType') == 'SUV' ? 'selected' : '' }}>SUV
+                                    </option>
+                                    <option value="Sedan" {{ old('carType') == 'Sedan' ? 'selected' : '' }}>Sedan
+                                    </option>
+                                    <option value="Hatchback" {{ old('carType') == 'Hatchback' ? 'selected' : '' }}>
+                                        Hatchback</option>
+                                    <option value="Foreign" {{ old('carType') == 'Foreign' ? 'selected' : '' }}>
+                                        Foreign</option>
+                                </select>
+                                <div class="invalid-feedback">Select car type.</div>
+                            </div>
+                        </div>
+
+                        <!-- Car Name -->
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="carName" class="form-label">Car Name *</label>
+                                <input type="text" class="form-control" id="carName"
+                                    value="{{ old('carName') }}" name="car_name" placeholder="Enter car name"
+                                    required>
+                                <div class="invalid-feedback">Enter car name.</div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Submit Button -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-explore">Submit</button>
                 </div>
-            </fieldset>
-
-            <!-- Submit Button -->
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-explore">Submit</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
-            preloader.style.display = 'none'; 
+            preloader.style.display = 'none';
         });
     </script>
- <script>
-    (() => {
-        'use strict';
-        const forms = document.querySelectorAll('.needs-validation');
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
+    <script>
+        (() => {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        // JavaScript code to populate form fields when the edit button is clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            const editButtons = document.querySelectorAll('.select-plan');
+
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+
+                    // Get the data attributes from the clicked button
+                    const planId = button.getAttribute('data-plan-id');
+                    const planName = button.getAttribute('data-plan-name');
+                    const planPrice = button.getAttribute('data-plan-price');
+
+                    // // Set the form values
+                    // document.getElementById('plan_type').value = planName;
+                    // document.getElementById('plan_price').value = planPrice;
+
+                    // // Optionally, set the hidden input for the plan ID if you are updating it
+                    // document.getElementById('plan_id_edit').value = planId;
+                    $.ajax({
+                        url: "{{ route('find.plan.data') }}",
+                        type: 'POST', // or GET if you're just retrieving data
+                        data: {
+                            _token: '{{ csrf_token() }}', // CSRF token for security
+                            id: planId // Passing the id in the request
+                        },
+                        success: function(response) {
+                            console.log(response);
+
+                            $('#serviceType').prop('disabled', false).empty()
+                                .append(
+                                    `<option value="${response.plan_name}">${response.plan_name}</option>`
+                                ); // Add default option
+
+
+                            document.getElementById('servicePrice').value = response
+                                .plan_price;
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('Error:', error); // Handle errors here
+                            var offcanvas = new bootstrap.Offcanvas($(
+                                '#serviceFormOffcanvas')[0]);
+                            offcanvas.hide();
+                        }
+                    });
+
+                });
+            });
         });
-    })();
-</script>
-<script
-  src="https://code.jquery.com/jquery-3.7.1.min.js"
-></script>
-<script>
-    // JavaScript code to populate form fields when the edit button is clicked
-    document.addEventListener('DOMContentLoaded', function() {
-        const editButtons = document.querySelectorAll('.select-plan');
+    </script>
+    <script>
+        // JSON object to map car types to their respective prices
+        const carPrices = {
+            "SUV": 1500,
+            "Sedan": 1200,
+            "Hatchback": 1000,
+            "Foreign": 1800
+        };
 
-        editButtons.forEach(button => {
-            button.addEventListener('click', function() {
+        // Listen for change in car type selection
+        document.querySelectorAll(".carType").forEach(function(carTypeSelect) {
+            carTypeSelect.addEventListener("change", function() {
+                // Get selected car type
+                const selectedCarType = this.value;
+                const planPriceElement = this.closest(".plan-card").querySelector(".plan-price");
+                const defaultPrice = this.closest(".plan-card").getAttribute("data-default-price");
 
-                // Get the data attributes from the clicked button
-                const planId = button.getAttribute('data-plan-id');
-                const planName = button.getAttribute('data-plan-name');
-                const planPrice = button.getAttribute('data-plan-price');
-
-                // // Set the form values
-                // document.getElementById('plan_type').value = planName;
-                // document.getElementById('plan_price').value = planPrice;
-
-                // // Optionally, set the hidden input for the plan ID if you are updating it
-                // document.getElementById('plan_id_edit').value = planId;
-                $.ajax({
-                url: "{{route('find.plan.data')}}",
-                type: 'POST', // or GET if you're just retrieving data
-                data: {
-                    _token: '{{ csrf_token() }}', // CSRF token for security
-                    id: planId  // Passing the id in the request
-                },
-                success: function(response){
-                    console.log(response);
-                    
-                    $('#serviceType').prop('disabled', false).empty()
-                    .append(`<option value="${response.plan_name}">${response.plan_name}</option>`); // Add default option
-
-              
-                    document.getElementById('servicePrice').value = response.plan_price ;
-                },
-                error: function(xhr, status, error){
-                    console.log('Error:', error); // Handle errors here
-                    var offcanvas = new bootstrap.Offcanvas($('#serviceFormOffcanvas')[0]);
-                offcanvas.hide();
+                if (selectedCarType && carPrices[selectedCarType]) {
+                    // Update price based on selected car type
+                    const newPrice = parseInt(defaultPrice) + carPrices[selectedCarType];
+                    planPriceElement.textContent = "₹ " + newPrice.toFixed(2);
+                } else {
+                    // Reset to default price if no selection is made
+                    planPriceElement.textContent = "₹ " + defaultPrice.toFixed(2);
                 }
             });
-
-            });
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>

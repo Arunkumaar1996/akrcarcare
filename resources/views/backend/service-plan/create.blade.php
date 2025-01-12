@@ -14,112 +14,122 @@
                 class="btn btn-explore">{{ __('Car Type') }}</x-comman-button>
         </div>
     </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
-                        </div>
-                    @endif
-                    <P class=" h3"> Service Type List</P>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Plan Name</th>
-                                    <th scope="col">Price (Rs.)</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($getPlans as $getPlan)
+    <div class="row">
+        <div class="py-12 col-md-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        <P class=" h3"> Service Type List</P>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
                                     <tr>
-                                        <th scope="row">{{ $getPlan->id }}</th>
-                                        <td>{{ ucfirst($getPlan->plan_name) }}</td>
-                                        <td>{{ $getPlan->plan_price }}</td>
-                                        <td>
-                                            <x-edit-button class="btn edit-btn" data-bs-toggle="offcanvas"
-                                                data-bs-target="#offcanvasEdit" aria-controls="offcanvasEdit"
-                                                data-plan-id="{{ $getPlan->id }}"
-                                                data-plan-name="{{ $getPlan->plan_name }}"
-                                                data-plan-price="{{ $getPlan->plan_price }}">
-                                                {{ __('Edit') }}
-                                            </x-edit-button>
-                                            {{-- <x-danger-button class="btn ">
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Plan Name</th>
+                                        <th scope="col">Price (Rs.)</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($getPlans as $getPlan)
+                                        <tr>
+                                            <th scope="row">{{ $getPlan->id }}</th>
+                                            <td>{{ ucfirst($getPlan->plan_name) }}</td>
+                                            <td>{{ $getPlan->plan_price }}</td>
+                                            <td>
+                                                <x-edit-button class="btn edit-btn" data-bs-toggle="offcanvas"
+                                                    data-bs-target="#offcanvasEdit" aria-controls="offcanvasEdit"
+                                                    data-plan-id="{{ $getPlan->id }}"
+                                                    data-plan-name="{{ $getPlan->plan_name }}"
+                                                    data-plan-price="{{ $getPlan->plan_price }}">
+                                                    {{ __('Edit') }}
+                                                </x-edit-button>
+                                                {{-- <x-danger-button class="btn ">
                                             {{ __('Delete') }}
                                         </x-danger-button> --}}
 
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p>Total Records: {{ $getPlans->total() }}</p>
+                            </div>
+                            <div>
+                                {{ $getPlans->links() }} <!-- Pagination Links -->
+                            </div>
+                        </div>
+
                     </div>
-
-
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="py-12 col-md-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                <P class=" h3">Car type Wise Price List</P>
-                {{-- car price --}}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Plan Name</th>
-                                <th scope="col">Price (Rs.)</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($carPrices as $carPrice)
-                                <tr>
-                                    <th scope="row">{{ $carPrice->id }}</th>
-                                    <td>{{ ucfirst($carPrice->car_type) }}</td>
-                                    <td>{{ $carPrice->price }}</td>
-                                    <td>
-                                        <x-edit-button class="btn edit-btn" data-bs-toggle="offcanvas"
-                                            data-bs-target="#offcanvasEdit" aria-controls="offcanvasEdit"
-                                            data-carPrice-id="{{ $carPrice->id }}"
-                                            data-carPrice-name="{{ $carPrice->car_type }}"
-                                            data-carPrice-price="{{ $carPrice->price }}">
-                                            {{ __('Edit') }}
-                                        </x-edit-button>
-                                        {{-- <x-danger-button class="btn ">
+                        <P class=" h3">Car type Wise Price List</P>
+                        {{-- car price --}}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Plan Name</th>
+                                        <th scope="col">Price (Rs.)</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($carPrices as $carPrice)
+                                        <tr>
+                                            <th scope="row">{{ $carPrice->id }}</th>
+                                            <td>{{ ucfirst($carPrice->car_type) }}</td>
+                                            <td>{{ $carPrice->price }}</td>
+                                            <td>
+                                                <x-edit-button class="btn edit-btn" data-bs-toggle="offcanvas"
+                                                    data-bs-target="#offcanvasEdit" aria-controls="offcanvasEdit"
+                                                    data-carPrice-id="{{ $carPrice->id }}"
+                                                    data-carPrice-name="{{ $carPrice->car_type }}"
+                                                    data-carPrice-price="{{ $carPrice->price }}">
+                                                    {{ __('Edit') }}
+                                                </x-edit-button>
+                                                {{-- <x-danger-button class="btn ">
                         {{ __('Delete') }}
                     </x-danger-button> --}}
 
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
 
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <p>Total Records: {{ $carPrices->total() }}</p>
-                    </div>
-                    <div>
-                        {{ $carPrices->links() }} <!-- Pagination Links -->
-                    </div>
-                </div>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p>Total Records: {{ $carPrices->total() }}</p>
+                            </div>
+                            <div>
+                                {{ $carPrices->links() }} <!-- Pagination Links -->
+                            </div>
+                        </div>
 
+                    </div>
+
+                </div>
             </div>
-
         </div>
     </div>
 

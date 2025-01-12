@@ -15,6 +15,7 @@ class ServicePlanController extends Controller
     public function create(){
         $getPlans =  ServicePlan::paginate(10);
         $carPrices =  CarPrice::paginate(10);
+        // dd($carPrices);
         return view('backend.service-plan.create',compact('getPlans','carPrices')); 
     }
     public function store(Request $request){

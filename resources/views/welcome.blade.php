@@ -373,7 +373,7 @@
                             {{ ucfirst($getPlan[0]->plan_name) }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title plan-price">₹ {{ $getPlan[0]->plan_price }}</h3>
+                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[0]->plan_price }}</span></h3>
                             <p class="card-text">A basic plan offering essential features for individuals.</p>
                         </div>
                         <div class="mb-3 row">
@@ -382,21 +382,20 @@
                             </div>
                             <div class="col-12 col-md-7">
                                 <select class="form-select form-select-sm carType" name="car_type" required>
-                                    <option value="">Choose</option>
-                                    <option value="SUV" {{ old('carType') == 'SUV' ? 'selected' : '' }}>SUV
-                                    </option>
-                                    <option value="Sedan" {{ old('carType') == 'Sedan' ? 'selected' : '' }}>Sedan
-                                    </option>
-                                    <option value="Hatchback" {{ old('carType') == 'Hatchback' ? 'selected' : '' }}>
-                                        Hatchback</option>
-                                    <option value="Foreign" {{ old('carType') == 'Foreign' ? 'selected' : '' }}>
-                                        Foreign</option>
+                                    <option value="Basic plan"  data-type-price="0" selected>Basic plan</option>
+                                    @foreach ($carPrices as $carPrice)
+                                        <option data-type-price ="{{ $carPrice->price }}"
+                                            value="{{  strtoUpper($carPrice->car_type)}}"
+                                            {{ old('carType') ==  strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
+                                            {{ strtoUpper($carPrice->car_type) }}</option>
+                                    @endforeach
+
                                 </select>
                                 <div class="invalid-feedback">Select car type.</div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-primary me-3 select-plan" id="select-plan-0" type="button"
+                            <button class="btn btn-primary me-3 select-plan" id="select-plan-0" type="button"  data-plan-name="{{ $getPlan[0]->plan_name }}"
                                 data-plan-id="{{ $getPlan[0]->id }}" data-bs-toggle="offcanvas"
                                 data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose
                                 Plan</button>
@@ -412,7 +411,7 @@
                             {{ ucfirst($getPlan[1]->plan_name) }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title plan-price">₹ {{ $getPlan[1]->plan_price }}</h3>
+                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[1]->plan_price }}</span></h3>
                             <p class="card-text">A balanced plan offering great value for families.</p>
                         </div>
                         <div class="mb-3 row">
@@ -421,21 +420,20 @@
                             </div>
                             <div class="col-12 col-md-7">
                                 <select class="form-select form-select-sm carType" name="car_type" required>
-                                    <option value="">Choose</option>
-                                    <option value="SUV" {{ old('carType') == 'SUV' ? 'selected' : '' }}>SUV
-                                    </option>
-                                    <option value="Sedan" {{ old('carType') == 'Sedan' ? 'selected' : '' }}>Sedan
-                                    </option>
-                                    <option value="Hatchback" {{ old('carType') == 'Hatchback' ? 'selected' : '' }}>
-                                        Hatchback</option>
-                                    <option value="Foreign" {{ old('carType') == 'Foreign' ? 'selected' : '' }}>
-                                        Foreign</option>
+                                    <option value="Basic plan"  data-type-price="0" selected>Basic plan</option>
+                                    @foreach ($carPrices as $carPrice)
+                                        <option data-type-price ="{{ $carPrice->price }}"
+                                            value="{{  strtoUpper($carPrice->car_type)}}"
+                                            {{ old('carType') ==  strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
+                                            {{ strtoUpper($carPrice->car_type) }}</option>
+                                    @endforeach
+
                                 </select>
                                 <div class="invalid-feedback">Select car type.</div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success me-3 select-plan" id="select-plan-1" type="button"
+                            <button class="btn btn-success me-3 select-plan" id="select-plan-1" type="button"  data-plan-name="{{ $getPlan[1]->plan_name }}"
                                 data-plan-id="{{ $getPlan[1]->id }}" data-bs-toggle="offcanvas"
                                 data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose
                                 Plan</button>
@@ -451,7 +449,7 @@
                             {{ ucfirst($getPlan[2]->plan_name) }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title plan-price">₹ {{ $getPlan[2]->plan_price }}</h3>
+                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[2]->plan_price }}</span></h3>
                             <p class="card-text">An all-inclusive plan offering premium features.</p>
                         </div>
                         <div class="mb-3 row">
@@ -460,21 +458,20 @@
                             </div>
                             <div class="col-12 col-md-7">
                                 <select class="form-select form-select-sm carType" name="car_type" required>
-                                    <option value="">Choose</option>
-                                    <option value="SUV" {{ old('carType') == 'SUV' ? 'selected' : '' }}>SUV
-                                    </option>
-                                    <option value="Sedan" {{ old('carType') == 'Sedan' ? 'selected' : '' }}>Sedan
-                                    </option>
-                                    <option value="Hatchback" {{ old('carType') == 'Hatchback' ? 'selected' : '' }}>
-                                        Hatchback</option>
-                                    <option value="Foreign" {{ old('carType') == 'Foreign' ? 'selected' : '' }}>
-                                        Foreign</option>
+                                    <option value="Basic plan"  data-type-price="0" selected>Basic plan</option>
+                                    @foreach ($carPrices as $carPrice)
+                                        <option data-type-price ="{{ $carPrice->price }}"
+                                            value="{{  strtoUpper($carPrice->car_type)}}"
+                                            {{ old('carType') ==  strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
+                                            {{ strtoUpper($carPrice->car_type) }}</option>
+                                    @endforeach
+
                                 </select>
                                 <div class="invalid-feedback">Select car type.</div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-danger me-3 select-plan" data-plan-id="{{ $getPlan[2]->id }}"
+                            <button class="btn btn-danger me-3 select-plan" data-plan-id="{{ $getPlan[2]->id }}"  data-plan-name="{{ $getPlan[2]->plan_name }}"
                                 id="select-plan-2" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose
                                 Plan</button>
@@ -577,6 +574,7 @@
                                 <select class="form-select" id="serviceType" name="service_type" required disabled>
 
                                 </select>
+
                                 <div class="invalid-feedback">Select a service type.</div>
                             </div>
                         </div>
@@ -587,7 +585,9 @@
                                 <label for="servicePrice" class="form-label">Service Price *</label>
                                 <input type="number" class="form-control" value="" id="servicePrice"
                                     name="servicePrice" placeholder="Enter price" required disabled>
-                                <input type="hidden" name="service_type_id" value="">
+                                <input type="hidden" id="service_type" name="service_type_name" value="">
+                                <input type="hidden" id="service_type_price" name="service_type_price" value="">
+                                <input type="hidden" id="car_type" name="car_type" value="">
                                 <div class="invalid-feedback">Enter service price.</div>
                             </div>
                         </div>
@@ -669,6 +669,11 @@
                                 <label for="state" class="form-label">State *</label>
                                 <select class="form-control" id="state" name="state" required>
                                     <option value="" disabled selected>Select a state</option>
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state }}" {{ old('state') == $state ? 'selected' : '' }}>
+                                            {{ $state }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 <div class="invalid-feedback">Please select a state.</div>
                             </div>
@@ -725,7 +730,7 @@
                         <div class="col-12 col-md-6">
                             <div class="mb-3">
                                 <label for="carType" class="form-label">Car Type *</label>
-                                <select class="form-select" id="carType" name="car_type" required>
+                                <select class="form-select" id="selectedCarType" name="car_type" required>
                                     <option value="">Choose</option>
                                     <option value="SUV" {{ old('carType') == 'SUV' ? 'selected' : '' }}>SUV
                                     </option>
@@ -792,16 +797,23 @@
 
             editButtons.forEach(button => {
                 button.addEventListener('click', function() {
-
+                    const card = this.closest('.card');
+                    const selectedOption = card.querySelector('.plan-price');
+                    const careTypeSelect = card.querySelector('.carType').value;
+                    console.log(careTypeSelect,'careTypeSelect');
+                    
+                    const planPrice = selectedOption.textContent.trim();
+                    
                     // Get the data attributes from the clicked button
                     const planId = button.getAttribute('data-plan-id');
-                    const planName = button.getAttribute('data-plan-name');
-                    const planPrice = button.getAttribute('data-plan-price');
-
+                    const planName = button.getAttribute('data-plan-name').toUpperCase();
+                    // const planPrice = button.getAttribute('data-plan-price');
+                    
+                    console.log(Option,'    ',planId,planName,'test');
                     // // Set the form values
                     // document.getElementById('plan_type').value = planName;
                     // document.getElementById('plan_price').value = planPrice;
-
+                  
                     // // Optionally, set the hidden input for the plan ID if you are updating it
                     // document.getElementById('plan_id_edit').value = planId;
                     $.ajax({
@@ -814,14 +826,20 @@
                         success: function(response) {
                             console.log(response);
 
-                            $('#serviceType').prop('disabled', false).empty()
+                            $('#serviceType').prop('disabled', true).empty()
                                 .append(
-                                    `<option value="${response.plan_name}">${response.plan_name}</option>`
+                                    `<option value="${planName}">${planName}</option>`
                                 ); // Add default option
+                                // $('#service_type').value()
+                                $('#selectedCarType').prop('disabled', true).empty()
+                                .append(
+                                    `<option value="${careTypeSelect}">${careTypeSelect}</option>`
+                                );
 
-
-                            document.getElementById('servicePrice').value = response
-                                .plan_price;
+                            document.getElementById('servicePrice').value = planPrice;
+                            document.getElementById('service_type_price').value = planPrice;
+                            document.getElementById('service_type').value = planName;
+                            document.getElementById('car_type').value = careTypeSelect;
                         },
                         error: function(xhr, status, error) {
                             console.log('Error:', error); // Handle errors here
@@ -835,34 +853,37 @@
             });
         });
     </script>
-    <script>
-        // JSON object to map car types to their respective prices
-        const carPrices = {
-            "SUV": 1500,
-            "Sedan": 1200,
-            "Hatchback": 1000,
-            "Foreign": 1800
-        };
+ <script>
+    // Function to update plan price
+    function updatePlanPrice(card, selectedOption) {
+        const planPriceElement = card.querySelector('.plan-price');
+        const carPrice = parseFloat(selectedOption.getAttribute('data-type-price'));
+        const planBasePrice = parseFloat(card.getAttribute('data-default-price'));
+        
+        const updatedPrice = planBasePrice + carPrice;
+        planPriceElement.textContent = updatedPrice.toFixed(2);  // Format the price to 2 decimal places
+    }
 
-        // Listen for change in car type selection
-        document.querySelectorAll(".carType").forEach(function(carTypeSelect) {
-            carTypeSelect.addEventListener("change", function() {
-                // Get selected car type
-                const selectedCarType = this.value;
-                const planPriceElement = this.closest(".plan-card").querySelector(".plan-price");
-                const defaultPrice = this.closest(".plan-card").getAttribute("data-default-price");
-
-                if (selectedCarType && carPrices[selectedCarType]) {
-                    // Update price based on selected car type
-                    const newPrice = parseInt(defaultPrice) + carPrices[selectedCarType];
-                    planPriceElement.textContent = "₹ " + newPrice.toFixed(2);
-                } else {
-                    // Reset to default price if no selection is made
-                    planPriceElement.textContent = "₹ " + defaultPrice.toFixed(2);
-                }
-            });
+    // Initialize the page with default selected car type and price
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.carType').forEach(function(selectElement) {
+            const selectedOption = selectElement.querySelector('option:checked');
+            if (selectedOption && selectedOption.value !== '0') {
+                const card = selectElement.closest('.card');
+                updatePlanPrice(card, selectedOption);
+            }
         });
-    </script>
+    });
+
+    // Update plan price when car type is selected
+    document.querySelectorAll('.carType').forEach(function(selectElement) {
+        selectElement.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const card = this.closest('.card');
+            updatePlanPrice(card, selectedOption);
+        });
+    });
+</script>
 </body>
 
 </html>

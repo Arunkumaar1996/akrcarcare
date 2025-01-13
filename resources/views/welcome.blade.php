@@ -192,6 +192,67 @@
             color: #6c757d;
         }
     </style>
+    <style>
+        /* Background Gradient or Image */
+        .background-section {
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient background */
+            /* OR use background image like below */
+            /* background: url('path/to/your-image.jpg') no-repeat center center fixed; */
+            background-size: cover;
+            /* min-height: 100vh; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .comment-form-container {
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent background for form */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px; /* Compact width */
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            padding: 8px 12px; /* Reduced padding for compact design */
+            font-size: 14px; /* Smaller font size */
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            font-size: 14px;
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .alert {
+            margin-bottom: 15px;
+        }
+
+        /* Form label styling */
+        .form-label {
+            font-weight: bold;
+        }
+
+        /* Error message styling */
+        .text-danger {
+            font-size: 12px;
+        }
+
+        /* Success message styling */
+        .alert-success {
+            font-size: 14px;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -373,7 +434,8 @@
                             {{ ucfirst($getPlan[0]->plan_name) }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[0]->plan_price }}</span></h3>
+                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[0]->plan_price }}</span>
+                            </h3>
                             <p class="card-text">A basic plan offering essential features for individuals.</p>
                         </div>
                         <div class="mb-3 row">
@@ -382,11 +444,11 @@
                             </div>
                             <div class="col-12 col-md-7">
                                 <select class="form-select form-select-sm carType" name="car_type" required>
-                                    <option value="Basic plan"  data-type-price="0" selected>Basic plan</option>
+                                    <option value="Basic plan" data-type-price="0" selected>Basic plan</option>
                                     @foreach ($carPrices as $carPrice)
                                         <option data-type-price ="{{ $carPrice->price }}"
-                                            value="{{  strtoUpper($carPrice->car_type)}}"
-                                            {{ old('carType') ==  strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
+                                            value="{{ strtoUpper($carPrice->car_type) }}"
+                                            {{ old('carType') == strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
                                             {{ strtoUpper($carPrice->car_type) }}</option>
                                     @endforeach
 
@@ -395,9 +457,10 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-primary me-3 select-plan" id="select-plan-0" type="button"  data-plan-name="{{ $getPlan[0]->plan_name }}"
-                                data-plan-id="{{ $getPlan[0]->id }}" data-bs-toggle="offcanvas"
-                                data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose
+                            <button class="btn btn-primary me-3 select-plan" id="select-plan-0" type="button"
+                                data-plan-name="{{ $getPlan[0]->plan_name }}" data-plan-id="{{ $getPlan[0]->id }}"
+                                data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas"
+                                aria-controls="serviceFormOffcanvas">Choose
                                 Plan</button>
                         </div>
                     </div>
@@ -411,7 +474,8 @@
                             {{ ucfirst($getPlan[1]->plan_name) }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[1]->plan_price }}</span></h3>
+                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[1]->plan_price }}</span>
+                            </h3>
                             <p class="card-text">A balanced plan offering great value for families.</p>
                         </div>
                         <div class="mb-3 row">
@@ -420,11 +484,11 @@
                             </div>
                             <div class="col-12 col-md-7">
                                 <select class="form-select form-select-sm carType" name="car_type" required>
-                                    <option value="Basic plan"  data-type-price="0" selected>Basic plan</option>
+                                    <option value="Basic plan" data-type-price="0" selected>Basic plan</option>
                                     @foreach ($carPrices as $carPrice)
                                         <option data-type-price ="{{ $carPrice->price }}"
-                                            value="{{  strtoUpper($carPrice->car_type)}}"
-                                            {{ old('carType') ==  strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
+                                            value="{{ strtoUpper($carPrice->car_type) }}"
+                                            {{ old('carType') == strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
                                             {{ strtoUpper($carPrice->car_type) }}</option>
                                     @endforeach
 
@@ -433,9 +497,10 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success me-3 select-plan" id="select-plan-1" type="button"  data-plan-name="{{ $getPlan[1]->plan_name }}"
-                                data-plan-id="{{ $getPlan[1]->id }}" data-bs-toggle="offcanvas"
-                                data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose
+                            <button class="btn btn-success me-3 select-plan" id="select-plan-1" type="button"
+                                data-plan-name="{{ $getPlan[1]->plan_name }}" data-plan-id="{{ $getPlan[1]->id }}"
+                                data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas"
+                                aria-controls="serviceFormOffcanvas">Choose
                                 Plan</button>
                         </div>
                     </div>
@@ -449,7 +514,8 @@
                             {{ ucfirst($getPlan[2]->plan_name) }}
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[2]->plan_price }}</span></h3>
+                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[2]->plan_price }}</span>
+                            </h3>
                             <p class="card-text">An all-inclusive plan offering premium features.</p>
                         </div>
                         <div class="mb-3 row">
@@ -458,11 +524,11 @@
                             </div>
                             <div class="col-12 col-md-7">
                                 <select class="form-select form-select-sm carType" name="car_type" required>
-                                    <option value="Basic plan"  data-type-price="0" selected>Basic plan</option>
+                                    <option value="Basic plan" data-type-price="0" selected>Basic plan</option>
                                     @foreach ($carPrices as $carPrice)
                                         <option data-type-price ="{{ $carPrice->price }}"
-                                            value="{{  strtoUpper($carPrice->car_type)}}"
-                                            {{ old('carType') ==  strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
+                                            value="{{ strtoUpper($carPrice->car_type) }}"
+                                            {{ old('carType') == strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
                                             {{ strtoUpper($carPrice->car_type) }}</option>
                                     @endforeach
 
@@ -471,9 +537,10 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-danger me-3 select-plan" data-plan-id="{{ $getPlan[2]->id }}"  data-plan-name="{{ $getPlan[2]->plan_name }}"
-                                id="select-plan-2" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#serviceFormOffcanvas" aria-controls="serviceFormOffcanvas">Choose
+                            <button class="btn btn-danger me-3 select-plan" data-plan-id="{{ $getPlan[2]->id }}"
+                                data-plan-name="{{ $getPlan[2]->plan_name }}" id="select-plan-2" type="button"
+                                data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas"
+                                aria-controls="serviceFormOffcanvas">Choose
                                 Plan</button>
                         </div>
                     </div>
@@ -482,6 +549,90 @@
 
         </div>
     </section>
+    {{-- Commands section --}}
+    <section>
+        <style>
+            .contact-info {
+              margin-bottom: 20px;
+            }
+            .contact-info i {
+              font-size: 1.5rem;
+              margin-right: 10px;
+              color: #28a745;
+              border-radius: 50%;
+              padding: 10px;
+              transition: background-color 0.3s ease, color 0.3s ease;
+            }
+            .contact-info i:hover {
+              background-color: #28a745;
+              color: #fff;
+            }
+            .contact-map iframe {
+              width: 100%;
+              height: 250px;
+              border: 0;
+            }
+            @media (max-width: 768px) {
+              .contact-section {
+                flex-direction: column;
+              }
+              .contact-map iframe {
+                height: 200px;
+              }
+            }
+          </style>
+         <div class="container py-5">
+            <h1 class="text-center ">Contact</h1>
+            <div class="row contact-section d-flex align-items-start">
+              <!-- Contact Info Section -->
+              <div class="col-lg-5 mb-4">
+                <div class="contact-info">
+                  <i class="bi bi-geo-alt"></i>
+                  <span><strong>Address:</strong>no.34, new street, chennai, TN-600001</span>
+                </div>
+                <div class="contact-info">
+                  <i class="bi bi-telephone"></i>
+                  <span><strong>Call Us:</strong> +91 7418191487</span>
+                </div>
+                <div class="contact-info">
+                  <i class="bi bi-envelope"></i>
+                  <span><strong>Email Us:</strong> pai@gmail.com</span>
+                </div>
+                <div class="contact-map">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.9065476040427!2d-74.00601528459563!3d40.71277597933061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzQ2LjAiTiA3NMKwMDAnMTIuMCJX!5e0!3m2!1sen!2sus!4v1617972967842!5m2!1sen!2sus"></iframe>
+                </div>
+              </div>
+        
+              <!-- Contact Form Section -->
+              <div class="col-lg-7">
+                <form action="{{ route('contact.store') }}" method="POST" class="p-4 border rounded">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Your Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Write your message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Send Message</button>
+                </form>
+              </div>
+            </div>
+          </div>
+    </section>
+
+    {{-- Footer section --}}
     <section id="footer">
         <footer style="background-color: #2a2a2a; color: #f4f4f4;" class="py-5">
             <div class="container">
@@ -543,10 +694,10 @@
 
     {{-- offcanvas --}}
     {{-- offcanvas --}}
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas"
+    {{-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas"
         aria-controls="serviceFormOffcanvas">
         Open Form
-    </button>
+    </button> --}}
 
     <!-- Offcanvas -->
     <div class="offcanvas offcanvas-start w-100" tabindex="-1" id="serviceFormOffcanvas"
@@ -586,7 +737,8 @@
                                 <input type="number" class="form-control" value="" id="servicePrice"
                                     name="servicePrice" placeholder="Enter price" required disabled>
                                 <input type="hidden" id="service_type" name="service_type_name" value="">
-                                <input type="hidden" id="service_type_price" name="service_type_price" value="">
+                                <input type="hidden" id="service_type_price" name="service_type_price"
+                                    value="">
                                 <input type="hidden" id="car_type" name="car_type" value="">
                                 <div class="invalid-feedback">Enter service price.</div>
                             </div>
@@ -670,7 +822,8 @@
                                 <select class="form-control" id="state" name="state" required>
                                     <option value="" disabled selected>Select a state</option>
                                     @foreach ($states as $state)
-                                        <option value="{{ $state }}" {{ old('state') == $state ? 'selected' : '' }}>
+                                        <option value="{{ $state }}"
+                                            {{ old('state') == $state ? 'selected' : '' }}>
                                             {{ $state }}
                                         </option>
                                     @endforeach
@@ -800,20 +953,20 @@
                     const card = this.closest('.card');
                     const selectedOption = card.querySelector('.plan-price');
                     const careTypeSelect = card.querySelector('.carType').value;
-                    console.log(careTypeSelect,'careTypeSelect');
-                    
+                    console.log(careTypeSelect, 'careTypeSelect');
+
                     const planPrice = selectedOption.textContent.trim();
-                    
+
                     // Get the data attributes from the clicked button
                     const planId = button.getAttribute('data-plan-id');
                     const planName = button.getAttribute('data-plan-name').toUpperCase();
                     // const planPrice = button.getAttribute('data-plan-price');
-                    
-                    console.log(Option,'    ',planId,planName,'test');
+
+                    console.log(Option, '    ', planId, planName, 'test');
                     // // Set the form values
                     // document.getElementById('plan_type').value = planName;
                     // document.getElementById('plan_price').value = planPrice;
-                  
+
                     // // Optionally, set the hidden input for the plan ID if you are updating it
                     // document.getElementById('plan_id_edit').value = planId;
                     $.ajax({
@@ -830,14 +983,15 @@
                                 .append(
                                     `<option value="${planName}">${planName}</option>`
                                 ); // Add default option
-                                // $('#service_type').value()
-                                $('#selectedCarType').prop('disabled', true).empty()
+                            // $('#service_type').value()
+                            $('#selectedCarType').prop('disabled', true).empty()
                                 .append(
                                     `<option value="${careTypeSelect}">${careTypeSelect}</option>`
                                 );
 
                             document.getElementById('servicePrice').value = planPrice;
-                            document.getElementById('service_type_price').value = planPrice;
+                            document.getElementById('service_type_price').value =
+                                planPrice;
                             document.getElementById('service_type').value = planName;
                             document.getElementById('car_type').value = careTypeSelect;
                         },
@@ -853,37 +1007,37 @@
             });
         });
     </script>
- <script>
-    // Function to update plan price
-    function updatePlanPrice(card, selectedOption) {
-        const planPriceElement = card.querySelector('.plan-price');
-        const carPrice = parseFloat(selectedOption.getAttribute('data-type-price'));
-        const planBasePrice = parseFloat(card.getAttribute('data-default-price'));
-        
-        const updatedPrice = planBasePrice + carPrice;
-        planPriceElement.textContent = updatedPrice.toFixed(2);  // Format the price to 2 decimal places
-    }
+    <script>
+        // Function to update plan price
+        function updatePlanPrice(card, selectedOption) {
+            const planPriceElement = card.querySelector('.plan-price');
+            const carPrice = parseFloat(selectedOption.getAttribute('data-type-price'));
+            const planBasePrice = parseFloat(card.getAttribute('data-default-price'));
 
-    // Initialize the page with default selected car type and price
-    document.addEventListener('DOMContentLoaded', function() {
+            const updatedPrice = planBasePrice + carPrice;
+            planPriceElement.textContent = updatedPrice.toFixed(2); // Format the price to 2 decimal places
+        }
+
+        // Initialize the page with default selected car type and price
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.carType').forEach(function(selectElement) {
+                const selectedOption = selectElement.querySelector('option:checked');
+                if (selectedOption && selectedOption.value !== '0') {
+                    const card = selectElement.closest('.card');
+                    updatePlanPrice(card, selectedOption);
+                }
+            });
+        });
+
+        // Update plan price when car type is selected
         document.querySelectorAll('.carType').forEach(function(selectElement) {
-            const selectedOption = selectElement.querySelector('option:checked');
-            if (selectedOption && selectedOption.value !== '0') {
-                const card = selectElement.closest('.card');
+            selectElement.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const card = this.closest('.card');
                 updatePlanPrice(card, selectedOption);
-            }
+            });
         });
-    });
-
-    // Update plan price when car type is selected
-    document.querySelectorAll('.carType').forEach(function(selectElement) {
-        selectElement.addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const card = this.closest('.card');
-            updatePlanPrice(card, selectedOption);
-        });
-    });
-</script>
+    </script>
 </body>
 
 </html>

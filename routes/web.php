@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\CarTypeWisePriceEntrieController;
 use App\Http\Controllers\backend\ClientInfoCRUDController;
 use App\Http\Controllers\backend\ServicePlanController;
 use App\Http\Controllers\frontend\ClientServiceStoreController;
+use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Models\CarPrice;
 use App\Models\ServicePlan;
@@ -17,9 +18,12 @@ Route::get('/', function () {
     $states = json_decode(file_get_contents('resources/jsons/tamilnadu_districts.json'));
 
 
-
     return view('welcome',compact('getPlan','carPrices','states'));
 })->name('home');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+
+
 
 Route::post('/serviceForm', [ClientServiceStoreController::class, 'store'])->name('serviceForm.store');
 Route::get('/selected-plan/{id}', function ($id) {

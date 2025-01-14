@@ -22,6 +22,9 @@
                     <x-nav-link :href="route('client.list')" :active="request()->routeIs('client.list')">
                         {{ __('Client List') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('employees.create')" :active="request()->routeIs('employees.create')">
+                        {{ __('Employees List') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -79,6 +82,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('service-plan.create')" :active="request()->routeIs('service-plan.create')">
                 {{ __('Service Plan') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('client.list')" :active="request()->routeIs('client.list')">
+                {{ __('Client List') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('employees.create')" :active="request()->routeIs('employees.create')">
+                {{ __('Employees List') }}
             </x-responsive-nav-link>
         </div>
 

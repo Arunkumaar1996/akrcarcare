@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\CarTypeWisePriceEntrieController;
 use App\Http\Controllers\backend\ClientInfoCRUDController;
 use App\Http\Controllers\backend\ServicePlanController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\frontend\ClientServiceStoreController;
 use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\ProfileController;
@@ -59,4 +60,12 @@ Route::post('/car-price/store', [CarTypeWisePriceEntrieController::class, 'store
 
 
 Route::get('/client/list', [ClientInfoCRUDController::class, 'index'])->name('client.list');
+
+
+
+//Create Employees
+Route::get('/employees/create', [EmployeeController::class, 'index'])->name('employees.create');
+Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+Route::post('/employees/{id}/toggle-status', [EmployeeController::class, 'toggleActiveStatus'])->name('form.employee.toggleStatus');
+
 require __DIR__ . '/auth.php';

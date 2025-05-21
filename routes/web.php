@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AssignClientsEmployeeController;
 use App\Http\Controllers\backend\CarTypeWisePriceEntrieController;
 use App\Http\Controllers\backend\ClientInfoCRUDController;
 use App\Http\Controllers\backend\ServicePlanController;
@@ -67,5 +68,11 @@ Route::get('/client/list', [ClientInfoCRUDController::class, 'index'])->name('cl
 Route::get('/employees/create', [EmployeeController::class, 'index'])->name('employees.create');
 Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
 Route::post('/employees/{id}/toggle-status', [EmployeeController::class, 'toggleActiveStatus'])->name('form.employee.toggleStatus');
+
+
+Route::get('/employees/client', [AssignClientsEmployeeController::class, 'index'])->name('employees.index');
+Route::get('/employees/assign-clients', [AssignClientsEmployeeController::class, 'showAssignClientsForm'])->name('employees.assignClientsForm');
+Route::post('/employees/{id}/assign-clients', [AssignClientsEmployeeController::class, 'assignClients'])->name('employees.assignClients');
+
 
 require __DIR__ . '/auth.php';

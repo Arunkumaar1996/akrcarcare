@@ -2,7 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('employee.login') }}">
         @csrf
 
         <!-- Email Address -->
@@ -23,10 +23,7 @@
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
-        <x-text-input id="password" class="block mt-1 w-full"
-        type="hidden"
-        name="user-type"
-       value="employee" />
+
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">

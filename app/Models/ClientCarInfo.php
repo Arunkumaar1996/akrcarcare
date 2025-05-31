@@ -17,4 +17,8 @@ class ClientCarInfo extends Model
     {
         return $this->belongsToMany(ClientInfo::class, 'client_service_info');
     }
+      public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'car_info_employee', 'car_info_id', 'employee_id');
+    }
 }

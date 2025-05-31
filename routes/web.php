@@ -71,7 +71,7 @@ Route::post('/employees/{id}/toggle-status', [EmployeeController::class, 'toggle
 
 
 Route::get('/employees/client', [AssignClientsEmployeeController::class, 'index'])->name('employees.index');
-Route::get('/employees/assign-clients', [AssignClientsEmployeeController::class, 'showAssignClientsForm'])->name('employees.assignClientsForm');
+Route::post('/employees/assign-clients', [AssignClientsEmployeeController::class, 'assignCars'])->name('employees.assignClientsForm');
 Route::post('/employees/{id}/assign-clients', [AssignClientsEmployeeController::class, 'assignClients'])->name('employees.assignClients');
 
 

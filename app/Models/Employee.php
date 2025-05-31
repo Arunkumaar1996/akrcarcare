@@ -26,8 +26,9 @@ class Employee extends Authenticatable
     ];
     protected $hidden = ['password', 'remember_token'];
 
-    public function cars()
+public function cars()
 {
-    return $this->belongsToMany(ClientInfo::class, 'car_info_employee', 'employee_id', 'car_info_id');
+    return $this->belongsToMany(ClientCarInfo::class, 'car_info_employee', 'employee_id', 'car_info_id');
 }
+
 }

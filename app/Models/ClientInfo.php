@@ -33,4 +33,5 @@ class ClientInfo extends Model
     {
         return $this->belongsToMany(Employee::class, 'car_info_employee', 'car_info_id', 'employee_id');
     }
+    
 }

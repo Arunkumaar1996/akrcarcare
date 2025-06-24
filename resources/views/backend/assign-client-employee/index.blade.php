@@ -53,12 +53,13 @@
                                                 @endforeach
                                             </td>
                                             <td>
+{{-- {{ dd($client->employees->last()) }} --}}
 
                                                 <select class="form-select employee-select"
                                                     data-client-id="{{ $client->id }}">
                                                     <option value="">-- Select Client --</option>
                                                     @foreach ($employees as $employee)
-                                                        <option value="{{ $employee->id }}">{{ $employee->name }}
+                                                        <option value="{{ $employee->id }}"  {{ (isset($client->employees[0]) && $client->employees->last()->id == $employee->id) ? 'selected' : '' }}>{{ $employee->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>

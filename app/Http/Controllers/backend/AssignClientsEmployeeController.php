@@ -12,8 +12,8 @@ class AssignClientsEmployeeController extends Controller
 {
     public function index()
     {
-        $clients = ClientInfo::with('cars')->paginate(10);
-        // dd($clientLists);
+        $clients = ClientInfo::with('cars','employees')->paginate(10);
+        // dd($clients);
         $employees = Employee::select('id', 'name')->get();
         return view('backend.assign-client-employee.index', compact('clients', 'employees'));
     }

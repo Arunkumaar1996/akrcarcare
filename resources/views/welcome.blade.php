@@ -426,126 +426,66 @@
         <div class="container pb-5">
             <h1 class="text-center mb-5">Our Plans</h1>
             <div class="row g-4">
-                <!-- Basic Plan -->
-                <div class="col-md-4">
-                    <div class="card plan-card text-center border-primary"
-                        data-default-price="{{ $getPlan[0]->plan_price }}">
-                        <div class="card-header bg-primary text-white">
-                            {{ ucfirst($getPlan[0]->plan_name) }}
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[0]->plan_price }}</span>
-                            </h3>
-                            <p class="card-text">A basic plan offering essential features for individuals.</p>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-12 col-md-5 p-0">
-                                <label for="carType" class="form-label form-label-sm">Car Type</label>
-                            </div>
-                            <div class="col-12 col-md-7">
-                                <select class="form-select form-select-sm carType" name="car_type" required>
-                                    <option value="Basic plan" data-type-price="0" selected>Basic plan</option>
-                                    @foreach ($carPrices as $carPrice)
-                                        <option data-type-price ="{{ $carPrice->price }}"
-                                            value="{{ strtoUpper($carPrice->car_type) }}"
-                                            {{ old('carType') == strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
-                                            {{ strtoUpper($carPrice->car_type) }}</option>
-                                    @endforeach
+             @empty($getPlan)
+    <p>No users found.</p>
+@else
+    @foreach ($getPlan as $index => $plan)
+        @php
+            $borderClass = ['border-primary', 'border-success', 'border-danger'][$index % 3];
+            $bgClass = ['bg-primary', 'bg-success', 'bg-danger'][$index % 3];
+            $btnClass = ['btn-primary', 'btn-success', 'btn-danger'][$index % 3];
+            $cardDescriptions = [
+                'A basic plan offering essential features for individuals.',
+                'A balanced plan offering great value for families.',
+                'An all-inclusive plan offering premium features.'
+            ];
+        @endphp
 
-                                </select>
-                                <div class="invalid-feedback">Select car type.</div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-primary me-3 select-plan" id="select-plan-0" type="button"
-                                data-plan-name="{{ $getPlan[0]->plan_name }}" data-plan-id="{{ $getPlan[0]->id }}"
-                                data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas"
-                                aria-controls="serviceFormOffcanvas">Choose
-                                Plan</button>
-                        </div>
+        <div class="col-md-4">
+            <div class="card plan-card text-center {{ $borderClass }}"
+                data-default-price="{{ $plan->plan_price }}">
+                <div class="card-header {{ $bgClass }} text-white">
+                    {{ ucfirst($plan->plan_name) }}
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">₹ <span class="plan-price">{{ $plan->plan_price }}</span></h3>
+                    <p class="card-text">{{ $cardDescriptions[$index % 3] }}</p>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-12 col-md-5 p-0">
+                        <label for="carType" class="form-label form-label-sm">Car Type</label>
+                    </div>
+                    <div class="col-12 col-md-7">
+                        <select class="form-select form-select-sm carType" name="car_type" required>
+                            <option value="Basic plan" data-type-price="0" selected>Basic plan</option>
+                            @foreach ($carPrices as $carPrice)
+                                <option data-type-price="{{ $carPrice->price }}"
+                                    value="{{ strtoupper($carPrice->car_type) }}"
+                                    {{ old('carType') == strtoupper($carPrice->car_type) ? 'selected' : '' }}>
+                                    {{ strtoupper($carPrice->car_type) }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback">Select car type.</div>
                     </div>
                 </div>
 
-                <!-- Standard Plan -->
-                <div class="col-md-4">
-                    <div class="card plan-card text-center border-success"
-                        data-default-price="{{ $getPlan[1]->plan_price }}">
-                        <div class="card-header bg-success text-white">
-                            {{ ucfirst($getPlan[1]->plan_name) }}
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[1]->plan_price }}</span>
-                            </h3>
-                            <p class="card-text">A balanced plan offering great value for families.</p>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-12 col-md-5 p-0">
-                                <label for="carType" class="form-label form-label-sm">Car Type</label>
-                            </div>
-                            <div class="col-12 col-md-7">
-                                <select class="form-select form-select-sm carType" name="car_type" required>
-                                    <option value="Basic plan" data-type-price="0" selected>Basic plan</option>
-                                    @foreach ($carPrices as $carPrice)
-                                        <option data-type-price ="{{ $carPrice->price }}"
-                                            value="{{ strtoUpper($carPrice->car_type) }}"
-                                            {{ old('carType') == strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
-                                            {{ strtoUpper($carPrice->car_type) }}</option>
-                                    @endforeach
-
-                                </select>
-                                <div class="invalid-feedback">Select car type.</div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success me-3 select-plan" id="select-plan-1" type="button"
-                                data-plan-name="{{ $getPlan[1]->plan_name }}" data-plan-id="{{ $getPlan[1]->id }}"
-                                data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas"
-                                aria-controls="serviceFormOffcanvas">Choose
-                                Plan</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Premium Plan -->
-                <div class="col-md-4">
-                    <div class="card plan-card text-center border-danger"
-                        data-default-price="{{ $getPlan[2]->plan_price }}">
-                        <div class="card-header bg-danger text-white">
-                            {{ ucfirst($getPlan[2]->plan_name) }}
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">₹ <span class="plan-price">{{ $getPlan[2]->plan_price }}</span>
-                            </h3>
-                            <p class="card-text">An all-inclusive plan offering premium features.</p>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-12 col-md-5 p-0">
-                                <label for="carType" class="form-label form-label-sm">Car Type</label>
-                            </div>
-                            <div class="col-12 col-md-7">
-                                <select class="form-select form-select-sm carType" name="car_type" required>
-                                    <option value="Basic plan" data-type-price="0" selected>Basic plan</option>
-                                    @foreach ($carPrices as $carPrice)
-                                        <option data-type-price ="{{ $carPrice->price }}"
-                                            value="{{ strtoUpper($carPrice->car_type) }}"
-                                            {{ old('carType') == strtoUpper($carPrice->car_type) ? 'selected' : '' }}>
-                                            {{ strtoUpper($carPrice->car_type) }}</option>
-                                    @endforeach
-
-                                </select>
-                                <div class="invalid-feedback">Select car type.</div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-danger me-3 select-plan" data-plan-id="{{ $getPlan[2]->id }}"
-                                data-plan-name="{{ $getPlan[2]->plan_name }}" id="select-plan-2" type="button"
-                                data-bs-toggle="offcanvas" data-bs-target="#serviceFormOffcanvas"
-                                aria-controls="serviceFormOffcanvas">Choose
-                                Plan</button>
-                        </div>
-                    </div>
+                <div class="card-footer">
+                    <button class="btn {{ $btnClass }} me-3 select-plan"
+                        id="select-plan-{{ $index }}" type="button"
+                        data-plan-name="{{ $plan->plan_name }}"
+                        data-plan-id="{{ $plan->id }}"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#serviceFormOffcanvas"
+                        aria-controls="serviceFormOffcanvas">
+                        Choose Plan
+                    </button>
                 </div>
             </div>
+        </div>
+    @endforeach
+@endempty
 
         </div>
     </section>

@@ -16,7 +16,7 @@ class EmployeeAuthSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('auth.employee.login');
     }
 
     /**
@@ -36,12 +36,12 @@ class EmployeeAuthSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        Auth::guard('employee')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('employee.login');
     }
 }

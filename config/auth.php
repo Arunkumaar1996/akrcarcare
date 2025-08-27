@@ -42,7 +42,7 @@ return [
         ],
         'employee' => [
             'driver' => 'session',
-            'provider' => 'employees',
+            'provider' => 'employee',
         ],
     ],
 
@@ -105,6 +105,11 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+    //      'employees' => [
+    //     'provider' => 'employees',
+    //     'table' => 'employee_password_reset_tokens',
+    //     'expire' => 60,
+    // ],
     ],
 
     /*

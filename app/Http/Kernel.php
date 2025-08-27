@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 class Kernel extends HttpKernel
 {
     /**
-     * Global HTTP middleware stack
+     * Global middleware stack
      */
     protected $middleware = [
         \App\Http\Middleware\TrustProxies::class,
@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * Route middleware groups
+     * Middleware groups
      */
     protected $middlewareGroups = [
         'web' => [

@@ -9,6 +9,7 @@ class MultiAuth
 {
     public function handle($request, Closure $next, ...$guards)
     {
+        dd('ttt');
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 // Set the active guard for this request

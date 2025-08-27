@@ -42,9 +42,9 @@ Route::post('/find/plan/data', function (Request $request) {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['multi_auth:web,employee', 'verified'])->name('dashboard');
+})->middleware(['web', 'multi_auth:web,employee', 'verified'])->name('dashboard');
 
-Route::middleware(['multi_auth:web,employee'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
